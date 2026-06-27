@@ -29,68 +29,69 @@
 
 <!-- OVERVIEW -->
 <div id="tab-overview" class="tab-panel active">
-  <div class="container">
-    <div class="section-block">
-      <div class="section-eyebrow">The big picture</div>
-      <div class="section-title">Five steps. In this order.</div>
-      <p style="font-size:14px; color:var(--text-soft); margin-bottom:2rem;">Your military service unlocked a set of benefits that, used in the right sequence, can get you a free degree, a pile of savings, and a home — with no money down. Here is how it works.</p>
+  <div class="container" style="max-width:620px;">
 
-      <div class="workflow">
-        <div class="workflow-step" onclick="showTabByName('phase1')">
-          <div class="workflow-num">1</div>
-          <div class="workflow-content">
-            <div class="workflow-title">Review your benefits</div>
-            <div class="workflow-desc">Create your VA.gov account, download your award letter, and get your disability rating reviewed by a free veteran advocate. Your rating affects every number in this plan.</div>
-            <div class="workflow-link">Phase 1: Foundation →</div>
-          </div>
+    <div class="overview-steps">
+      <div class="overview-step" onclick="showTabByName('phase1')">
+        <div class="overview-left">
+          <div class="overview-num">1</div>
+          <div class="overview-line"></div>
         </div>
-        <div class="workflow-arrow">↓</div>
-
-        <div class="workflow-step" onclick="showTabByName('phase2')">
-          <div class="workflow-num">2</div>
-          <div class="workflow-content">
-            <div class="workflow-title">Get your living expenses paid for</div>
-            <div class="workflow-desc">Apply for Vocational Rehab (VR&amp;E) first. If approved, the VA pays a monthly housing allowance directly to you while you are in school — on top of your disability income. This is your savings engine.</div>
-            <div class="workflow-link">Phase 2: School →</div>
-          </div>
+        <div class="overview-body">
+          <div class="overview-title">Review your benefits</div>
+          <div class="overview-desc">Get your VA.gov account set up and your disability rating reviewed. Your rating determines your monthly income and affects every step that follows.</div>
+          <div class="overview-cta">Phase 1: Foundation →</div>
         </div>
-        <div class="workflow-arrow">↓</div>
+      </div>
 
-        <div class="workflow-step" onclick="showTabByName('phase2')">
-          <div class="workflow-num">3</div>
-          <div class="workflow-content">
-            <div class="workflow-title">Get school or training paid for</div>
-            <div class="workflow-desc">VR&amp;E pays your tuition, books, and required technology directly — you never see that money, it goes straight to the school. Use it for your full degree and your GI Bill stays completely untouched.</div>
-            <div class="workflow-link">Phase 2: School →</div>
-          </div>
+      <div class="overview-step" onclick="showTabByName('phase2')">
+        <div class="overview-left">
+          <div class="overview-num">2</div>
+          <div class="overview-line"></div>
         </div>
-        <div class="workflow-arrow">↓</div>
-
-        <div class="workflow-step" onclick="showTabByName('phase3')">
-          <div class="workflow-num">4</div>
-          <div class="workflow-content">
-            <div class="workflow-title">Save</div>
-            <div class="workflow-desc">While in school, your tuition is covered and two checks hit your account every month. Live on less than you make. Use the calculator to see exactly how much you can stack up over 2 or 4 years.</div>
-            <div class="workflow-link">Phase 3: Save →</div>
-          </div>
+        <div class="overview-body">
+          <div class="overview-title">Get school paid for</div>
+          <div class="overview-desc">Apply for VR&amp;E (Vocational Rehab) first. It covers your tuition, books, and tech — and preserves all 36 months of your GI Bill for later.</div>
+          <div class="overview-cta">Phase 2: School →</div>
         </div>
-        <div class="workflow-arrow">↓</div>
+      </div>
 
-        <div class="workflow-step" onclick="showTabByName('phase4')">
-          <div class="workflow-num">5</div>
-          <div class="workflow-content">
-            <div class="workflow-title">Buy a house</div>
-            <div class="workflow-desc">After graduation you have savings, a degree, and your full VA loan benefit — zero down payment, no mortgage insurance, no funding fee. In Florida, a permanent disability rating eliminates your property taxes entirely.</div>
-            <div class="workflow-link">Phase 4: Buy a Home →</div>
-          </div>
+      <div class="overview-step" onclick="showTabByName('phase2')">
+        <div class="overview-left">
+          <div class="overview-num">3</div>
+          <div class="overview-line"></div>
+        </div>
+        <div class="overview-body">
+          <div class="overview-title">Get your living expenses covered</div>
+          <div class="overview-desc">While enrolled, you receive a monthly housing check on top of your disability income. Two checks, zero tuition bill.</div>
+          <div class="overview-cta">Phase 2: School →</div>
+        </div>
+      </div>
+
+      <div class="overview-step" onclick="showTabByName('phase3')">
+        <div class="overview-left">
+          <div class="overview-num">4</div>
+          <div class="overview-line"></div>
+        </div>
+        <div class="overview-body">
+          <div class="overview-title">Save aggressively</div>
+          <div class="overview-desc">With expenses covered, put as much as possible aside each month. The calculator shows how much you can build over 2 or 4 years.</div>
+          <div class="overview-cta">Phase 3: Save →</div>
+        </div>
+      </div>
+
+      <div class="overview-step overview-step-last" onclick="showTabByName('phase4')">
+        <div class="overview-left">
+          <div class="overview-num">5</div>
+        </div>
+        <div class="overview-body">
+          <div class="overview-title">Buy a home</div>
+          <div class="overview-desc">After graduation: savings built, degree in hand, VA loan ready. Zero down, no mortgage insurance, no funding fee. In Florida, a permanent disability rating wipes out your property taxes.</div>
+          <div class="overview-cta">Phase 4: Buy a Home →</div>
         </div>
       </div>
     </div>
 
-    <div class="callout callout-blue" style="margin-top:1rem;">
-      <div class="callout-icon">💡</div>
-      <p><strong>Why this order matters:</strong> Most veterans either skip VR&amp;E entirely or use the GI Bill first without knowing what they are giving up. Doing it in this sequence means you go to school for free, keep a full GI Bill in reserve for later, and buy a house from a position of strength instead of scrambling. Each step makes the next one easier.</p>
-    </div>
   </div>
 </div>
 
