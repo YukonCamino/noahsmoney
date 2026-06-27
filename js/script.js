@@ -1,3 +1,19 @@
+function toggleStep(el) {
+  var step = el.closest('.step');
+  var key = 'step-' + el.dataset.step;
+  var done = step.classList.toggle('done');
+  localStorage.setItem(key, done ? '1' : '0');
+}
+
+function loadStepState() {
+  document.querySelectorAll('.step-num[data-step]').forEach(function(el) {
+    var key = 'step-' + el.dataset.step;
+    if (localStorage.getItem(key) === '1') {
+      el.closest('.step').classList.add('done');
+    }
+  });
+}
+
 function showTab(id, btn) {
   document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
   document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
@@ -45,3 +61,4 @@ function recalc() {
 }
 
 recalc();
+loadStepState();

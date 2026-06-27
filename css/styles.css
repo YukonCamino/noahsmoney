@@ -189,7 +189,16 @@ body {
   font-size: 13px; font-weight: 600;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0; margin-top: 2px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s, transform 0.1s;
 }
+.step-num:hover { background: var(--navy-mid); transform: scale(1.08); }
+.step.done .step-num { background: var(--green); }
+.step.done .step-num::after { content: '✓'; font-size: 14px; }
+.step.done .step-num span { display: none; }
+.step.done .step-body h4 { color: var(--text-muted); text-decoration: line-through; }
+.step.done .step-body p { color: #A0AEC0; }
 .step-body h4 { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 3px; }
 .step-body p { font-size: 13px; color: var(--text-soft); line-height: 1.6; }
 
