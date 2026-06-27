@@ -338,6 +338,34 @@ body {
 .home-detail { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
 .home-detail span { display: block; }
 
+/* WORKFLOW */
+.workflow { display: flex; flex-direction: column; }
+.workflow-step {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.25rem;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.workflow-step:hover { border-color: var(--navy); background: var(--blue-light); }
+.workflow-num {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: white;
+  font-size: 15px; font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.workflow-title { font-size: 15px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+.workflow-desc { font-size: 13px; color: var(--text-soft); line-height: 1.6; margin-bottom: 6px; }
+.workflow-link { font-size: 12px; font-weight: 600; color: var(--blue-mid); }
+.workflow-arrow { text-align: center; font-size: 20px; color: var(--gold); padding: 4px 0; line-height: 1; }
+
 /* FOOTER */
 .footer {
   background: var(--navy);

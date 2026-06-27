@@ -14,6 +14,11 @@ function loadStepState() {
   });
 }
 
+function showTabByName(id) {
+  var btn = document.querySelector('.tab-btn[onclick*="' + id + '"]');
+  if (btn) showTab(id, btn);
+}
+
 function showTab(id, btn) {
   document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
   document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
