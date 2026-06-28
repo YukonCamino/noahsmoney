@@ -52,6 +52,7 @@ function recalc() {
   }
 
   document.getElementById('total-income').textContent = fmt(totalIncome);
+  document.getElementById('annual-income').textContent = fmt(totalIncome * 12);
   document.getElementById('monthly-save').textContent = fmt(monthlySave);
   document.getElementById('save-2yr').textContent     = fmt(yearBalances[1]);
   document.getElementById('save-4yr').textContent     = fmt(yearBalances[3]);
