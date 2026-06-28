@@ -39,18 +39,27 @@ function recalc() {
 
   var totalIncome  = disability + gibill + books;
   var monthlySave  = Math.max(totalIncome - expenses, 0);
-  var save2yr      = monthlySave * 20;  // 10 months x 2 years
-  var save4yr      = monthlySave * 40;  // 10 months x 4 years
+  // Compound at 7% annual return, contributing monthlySave for 10 months per year
+  var monthlyRate = 0.07 / 12;
+  var balance = 0;
+  var yearBalances = [];
+  for (var yr = 0; yr < 4; yr++) {
+    for (var mo = 0; mo < 12; mo++) {
+      balance = balance * (1 + monthlyRate);
+      if (mo < 10) balance += monthlySave;
+    }
+    yearBalances.push(balance);
+  }
 
   document.getElementById('total-income').textContent = fmt(totalIncome);
   document.getElementById('monthly-save').textContent = fmt(monthlySave);
-  document.getElementById('save-2yr').textContent     = fmt(save2yr);
-  document.getElementById('save-4yr').textContent     = fmt(save4yr);
+  document.getElementById('save-2yr').textContent     = fmt(yearBalances[1]);
+  document.getElementById('save-4yr').textContent     = fmt(yearBalances[3]);
 
-  var y1 = monthlySave * 10;
-  var y2 = monthlySave * 20;
-  var y3 = monthlySave * 30;
-  var y4 = monthlySave * 40;
+  var y1 = yearBalances[0];
+  var y2 = yearBalances[1];
+  var y3 = yearBalances[2];
+  var y4 = yearBalances[3];
   var max = y4 || 1;
 
   function setBar(barId, valId, amount) {
