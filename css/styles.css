@@ -286,6 +286,9 @@ body {
 }
 .calc-input:focus { outline: 2px solid var(--blue-mid); border-color: transparent; }
 .calc-divider { border: none; border-top: 1px dashed var(--border); margin: 16px 0; }
+.calc-expense-row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+.calc-expense-label { font-size: 13px; color: var(--text-soft); flex: 1; }
+.calc-expense-input { width: 130px; flex-shrink: 0; }
 .calc-results {
   background: var(--navy);
   border-radius: var(--radius);

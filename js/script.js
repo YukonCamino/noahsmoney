@@ -1,3 +1,13 @@
+function addExpense() {
+  var container = document.getElementById('extra-expenses');
+  var row = document.createElement('div');
+  row.className = 'calc-expense-row';
+  row.innerHTML = '<input type="text" placeholder="Label" style="flex:1; padding:8px 10px; border:1px solid var(--border); border-radius:var(--radius); font-size:13px; font-family:inherit; color:var(--navy);">'
+    + '<input type="number" class="calc-input calc-expense-input" value="0" oninput="recalc()" style="width:130px;">';
+  container.appendChild(row);
+  row.querySelector('input[type=text]').focus();
+}
+
 function toggleStep(el) {
   var step = el.closest('.step');
   var key = 'step-' + el.dataset.step;
@@ -36,7 +46,10 @@ function recalc() {
   var gibill      = parseFloat(document.getElementById('gibill').value)      || 0;
   var books       = parseFloat(document.getElementById('books').value)       || 0;
   var employment  = parseFloat(document.getElementById('employment').value)  || 0;
-  var expenses    = parseFloat(document.getElementById('expenses').value)    || 0;
+  var expenses = 0;
+  document.querySelectorAll('.calc-expense-input').forEach(function(el) {
+    expenses += parseFloat(el.value) || 0;
+  });
 
   var totalIncome  = disability + gibill + books + employment;
   var monthlySave  = Math.max(totalIncome - expenses, 0);
