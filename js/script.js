@@ -32,12 +32,13 @@ function fmt(n) {
 }
 
 function recalc() {
-  var disability = parseFloat(document.getElementById('disability').value) || 0;
-  var gibill    = parseFloat(document.getElementById('gibill').value)    || 0;
-  var books     = parseFloat(document.getElementById('books').value)     || 0;
-  var expenses  = parseFloat(document.getElementById('expenses').value)  || 0;
+  var disability  = parseFloat(document.getElementById('disability').value)  || 0;
+  var gibill      = parseFloat(document.getElementById('gibill').value)      || 0;
+  var books       = parseFloat(document.getElementById('books').value)       || 0;
+  var employment  = parseFloat(document.getElementById('employment').value)  || 0;
+  var expenses    = parseFloat(document.getElementById('expenses').value)    || 0;
 
-  var totalIncome  = disability + gibill + books;
+  var totalIncome  = disability + gibill + books + employment;
   var monthlySave  = Math.max(totalIncome - expenses, 0);
   // Compound at 7% annual return, contributing monthlySave for 10 months per year
   var monthlyRate = 0.07 / 12;
