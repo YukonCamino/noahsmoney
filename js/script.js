@@ -303,9 +303,26 @@ function loadCCPaidState() {
   document.getElementById('cc-paid-badge').style.display  = paid ? 'inline-block' : 'none';
 }
 
+function loadEFState() {
+  var reached = localStorage.getItem('ef-reached') === '1';
+  if (reached) {
+    var freed = allocPcts.safety;
+    allocPcts.safety     = 0;
+    allocPcts.invest     = allocPcts.invest + freed;
+    allocPcts.retirement = 10;
+    document.getElementById('ef-reached-toggle').checked = true;
+    document.getElementById('safety-slider-block').style.display = 'none';
+    ['invest', 'wants', 'retirement'].forEach(function(k) {
+      document.getElementById('slider-' + k).value = allocPcts[k];
+      document.getElementById('pct-' + k).textContent = allocPcts[k] + '%';
+    });
+  }
+}
+
 recalc();
 recalcMortgage();
 loadStepState();
 loadLoanPaidState();
 loadCCPaidState();
+loadEFState();
 recalc();
