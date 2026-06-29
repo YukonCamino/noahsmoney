@@ -119,9 +119,9 @@ function recalc() {
   var slice50   = monthlySave * (allocPcts.invest / 100);
   var wants     = monthlySave * (allocPcts.wants  / 100);
   var goals     = monthlySave * (allocPcts.goals  / 100);
-  var rothIRA   = Math.min(200, goals);
+  var rothIRA   = efReached ? goals : Math.min(200, goals);
   var efAlloc   = efReached ? 0 : Math.max(goals - 200, 0);
-  var invest50  = efReached ? slice50 + Math.max(goals - 200, 0) : slice50;
+  var invest50  = slice50;
   var efGoal    = expenses * 3;
 
   document.getElementById('alloc-50-label').textContent   = ccPaid ? 'Invest (Wealthfront)' : 'Credit card payoff';
