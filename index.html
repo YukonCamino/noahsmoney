@@ -343,20 +343,31 @@
       <div class="section-title">Your Budget</div>
 
       <!-- CC PRIORITY CARD -->
-      <div class="priority-card" id="cc-stats-block">
-        <div class="priority-card-header">Priority #1 — Credit card payoff</div>
-        <div class="priority-card-stats">
-          <div class="priority-stat"><span class="priority-stat-val" id="cc-months">—</span><span class="priority-stat-label">months to pay off</span></div>
-          <div class="priority-stat"><span class="priority-stat-val" id="cc-interest">—</span><span class="priority-stat-label">total interest</span></div>
-          <div class="priority-stat"><span class="priority-stat-val" id="cc-free-date">—</span><span class="priority-stat-label">debt-free date</span></div>
-        </div>
-        <div class="cc-toggle-wrap" style="padding:10px 0 0;">
-          <label class="cc-toggle-label" id="cc-toggle-label">
-            <input type="checkbox" id="cc-paid-toggle" onchange="toggleCCPaid()">
-            <span class="cc-toggle-box"></span>
-            Credit card is paid off
-          </label>
-          <span class="cc-paid-badge" id="cc-paid-badge">🎉 Debt free!</span>
+      <div class="budget-phase" id="cc-stats-block">
+        <div class="budget-phase-label">Priority #1 — Credit card payoff</div>
+        <div class="budget-phase-body" style="padding:14px 16px;">
+          <div style="display:flex; gap:0; margin-bottom:12px;">
+            <div style="flex:1; border-right:1px solid var(--border); padding-right:14px;">
+              <div style="font-size:18px; font-weight:700; color:var(--navy);" id="cc-months">—</div>
+              <div style="font-size:10px; text-transform:uppercase; letter-spacing:0.05em; color:var(--text-muted); margin-top:2px;">months to pay off</div>
+            </div>
+            <div style="flex:1; border-right:1px solid var(--border); padding:0 14px;">
+              <div style="font-size:18px; font-weight:700; color:var(--navy);" id="cc-interest">—</div>
+              <div style="font-size:10px; text-transform:uppercase; letter-spacing:0.05em; color:var(--text-muted); margin-top:2px;">total interest</div>
+            </div>
+            <div style="flex:1; padding-left:14px;">
+              <div style="font-size:18px; font-weight:700; color:var(--navy);" id="cc-free-date">—</div>
+              <div style="font-size:10px; text-transform:uppercase; letter-spacing:0.05em; color:var(--text-muted); margin-top:2px;">debt-free date</div>
+            </div>
+          </div>
+          <div class="cc-toggle-wrap" style="padding:0; border-top:1px solid var(--border); padding-top:10px;">
+            <label class="cc-toggle-label" id="cc-toggle-label">
+              <input type="checkbox" id="cc-paid-toggle" onchange="toggleCCPaid()">
+              <span class="cc-toggle-box"></span>
+              Credit card is paid off
+            </label>
+            <span class="cc-paid-badge" id="cc-paid-badge">🎉 Debt free!</span>
+          </div>
         </div>
       </div>
 
