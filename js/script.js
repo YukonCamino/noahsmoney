@@ -148,7 +148,7 @@ function recalc() {
   document.getElementById('alloc-wants').textContent      = fmt(wants) + '/mo';
   document.getElementById('alloc-safety').textContent     = fmt(safetyAmt) + '/mo';
   document.getElementById('alloc-roth').textContent       = fmt(rothIRA) + '/mo';
-  document.getElementById('alloc-emergency').textContent  = fmt(safetyAmt) + '/mo';
+  document.getElementById('alloc-emergency').textContent  = fmt(efGoal);
   document.getElementById('alloc-total').textContent      = fmt(monthlySave);
   document.getElementById('alloc-phase-label').textContent = ccPaid ? 'After payoff — how to split every month' : 'Right now — how to split every month';
   document.getElementById('rec-retirement').textContent   = 'Recommended: 10%';
