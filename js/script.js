@@ -168,6 +168,29 @@ showTab = function(id, btn) {
   }
 };
 
+function toggleLoanPaid() {
+  var checked = document.getElementById('loan-paid-toggle').checked;
+  localStorage.setItem('loan-paid', checked ? '1' : '0');
+  var input = document.getElementById('loan-input');
+  input.value = checked ? '0' : '900';
+  input.disabled = checked;
+  document.getElementById('loan-thru-label').style.display = checked ? 'none' : '';
+  document.getElementById('loan-paid-text').textContent = checked ? '✓ paid off' : 'paid off';
+  recalc();
+}
+
+function loadLoanPaidState() {
+  var paid = localStorage.getItem('loan-paid') === '1';
+  document.getElementById('loan-paid-toggle').checked = paid;
+  var input = document.getElementById('loan-input');
+  if (paid) {
+    input.value = '0';
+    input.disabled = true;
+    document.getElementById('loan-thru-label').style.display = 'none';
+    document.getElementById('loan-paid-text').textContent = '✓ paid off';
+  }
+}
+
 function toggleCCPaid() {
   var checked = document.getElementById('cc-paid-toggle').checked;
   localStorage.setItem('cc-paid', checked ? '1' : '0');
@@ -186,4 +209,6 @@ function loadCCPaidState() {
 recalc();
 recalcMortgage();
 loadStepState();
+loadLoanPaidState();
 loadCCPaidState();
+recalc();

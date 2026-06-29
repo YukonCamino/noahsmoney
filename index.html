@@ -247,8 +247,15 @@
               <input class="calc-input calc-expense-input" type="number" value="118" oninput="recalc()">
             </div>
             <div class="calc-expense-row">
-              <div class="calc-expense-label">Loan <span style="font-size:11px; color:var(--text-muted);">through Oct</span></div>
-              <input class="calc-input calc-expense-input" type="number" value="900" oninput="recalc()">
+              <div class="calc-expense-label">
+                Loan <span style="font-size:11px; color:var(--text-muted);" id="loan-thru-label">through Oct</span>
+                <label class="loan-paid-label" title="Mark as paid off">
+                  <input type="checkbox" id="loan-paid-toggle" onchange="toggleLoanPaid()">
+                  <span class="loan-paid-box"></span>
+                  <span class="loan-paid-text" id="loan-paid-text">paid off</span>
+                </label>
+              </div>
+              <input class="calc-input calc-expense-input" type="number" value="900" id="loan-input" oninput="recalc()">
             </div>
             <div class="calc-expense-row">
               <div class="calc-expense-label">Credit card</div>

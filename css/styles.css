@@ -394,6 +394,20 @@ body {
 .hero-save-label { font-size:14px; font-weight:600; color:rgba(255,255,255,0.85); }
 .hero-save-val { font-size:28px; font-weight:700; color:#fff; }
 
+/* LOAN PAID TOGGLE */
+.loan-paid-label { display:inline-flex; align-items:center; gap:5px; margin-left:8px; cursor:pointer; user-select:none; vertical-align:middle; }
+.loan-paid-label input { display:none; }
+.loan-paid-box {
+  width:14px; height:14px; border-radius:3px;
+  border:1.5px solid var(--border); background:white; flex-shrink:0;
+  display:inline-flex; align-items:center; justify-content:center;
+  transition:all 0.15s;
+}
+.loan-paid-label input:checked + .loan-paid-box { background:#1A6B45; border-color:#1A6B45; }
+.loan-paid-label input:checked + .loan-paid-box::after { content:'✓'; color:white; font-size:9px; font-weight:700; line-height:1; }
+.loan-paid-text { font-size:11px; color:var(--text-muted); }
+.loan-paid-label input:checked ~ .loan-paid-text { color:#1A6B45; font-weight:600; }
+
 /* CC TOGGLE */
 .cc-toggle-wrap { display:flex; align-items:center; gap:12px; padding:14px 0; }
 .cc-toggle-label { display:flex; align-items:center; gap:10px; cursor:pointer; font-size:14px; font-weight:600; color:var(--navy); user-select:none; }
