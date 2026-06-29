@@ -335,9 +335,9 @@
       <div class="section-eyebrow">How to spend what's left over</div>
       <div class="section-title">Your money allocation plan</div>
 
-      <!-- PHASE 1: CC PAYOFF -->
-      <div class="budget-phase">
-        <div class="budget-phase-label">First priority — pay off the credit card</div>
+      <!-- CC PAYOFF STATS -->
+      <div class="budget-phase" id="cc-stats-block">
+        <div class="budget-phase-label">Credit card payoff tracker — $5,231 at 20% APR</div>
         <div class="budget-phase-body">
           <div class="budget-cc-info">
             <div>
@@ -353,13 +353,23 @@
               <span class="budget-stat-label">debt-free date</span>
             </div>
           </div>
-          <p style="font-size:12px; color:var(--text-muted); margin-top:10px;">$5,231 balance at 20% APR. Put your entire monthly surplus toward this until it's gone — the 20% interest rate costs more than any investment earns.</p>
+          <p style="font-size:12px; color:var(--text-muted); margin-top:10px;">50% of your monthly surplus goes here until it's gone. At 20% APR, this card costs more than any investment earns — killing it first is the highest-return move you can make.</p>
         </div>
       </div>
 
-      <!-- PHASE 2: ALLOCATION PIE -->
-      <div class="budget-phase" style="margin-top:1rem;">
-        <div class="budget-phase-label">After payoff — how to allocate every month</div>
+      <!-- CC PAID OFF TOGGLE -->
+      <div class="cc-toggle-wrap">
+        <label class="cc-toggle-label" id="cc-toggle-label">
+          <input type="checkbox" id="cc-paid-toggle" onchange="toggleCCPaid()">
+          <span class="cc-toggle-box"></span>
+          Credit card is paid off
+        </label>
+        <span class="cc-paid-badge" id="cc-paid-badge">🎉 Debt free!</span>
+      </div>
+
+      <!-- ALLOCATION PIE -->
+      <div class="budget-phase" style="margin-top:0.5rem;">
+        <div class="budget-phase-label" id="alloc-phase-label">Right now — how to split every month</div>
         <div class="budget-phase-body">
           <div class="budget-split">
             <div class="budget-donut-wrap">
@@ -369,38 +379,30 @@
               <div class="budget-legend-item">
                 <div class="budget-legend-dot" style="background:#1A6B45;"></div>
                 <div>
-                  <div class="budget-legend-label">Invest (Wealthfront)</div>
-                  <div class="budget-legend-val" id="alloc-invest">—</div>
+                  <div class="budget-legend-label" id="alloc-50-label">Credit card payoff</div>
+                  <div class="budget-legend-val" id="alloc-50">—</div>
                 </div>
                 <div class="budget-legend-pct">50%</div>
               </div>
               <div class="budget-legend-item">
-                <div class="budget-legend-dot" style="background:#3567B0;"></div>
-                <div>
-                  <div class="budget-legend-label">Emergency fund</div>
-                  <div class="budget-legend-val" id="alloc-emergency">—</div>
-                </div>
-                <div class="budget-legend-pct">20%</div>
-              </div>
-              <div class="budget-legend-item">
                 <div class="budget-legend-dot" style="background:#C9971C;"></div>
                 <div>
-                  <div class="budget-legend-label">Vehicle / large purchases</div>
-                  <div class="budget-legend-val" id="alloc-vehicle">—</div>
+                  <div class="budget-legend-label">Wants <span style="font-weight:400; font-size:11px; color:var(--text-muted);">dining, travel, hobbies, shopping</span></div>
+                  <div class="budget-legend-val" id="alloc-wants">—</div>
                 </div>
-                <div class="budget-legend-pct">20%</div>
+                <div class="budget-legend-pct">30%</div>
               </div>
               <div class="budget-legend-item">
-                <div class="budget-legend-dot" style="background:#718096;"></div>
+                <div class="budget-legend-dot" style="background:#3567B0;"></div>
                 <div>
-                  <div class="budget-legend-label">Fun / travel</div>
-                  <div class="budget-legend-val" id="alloc-fun">—</div>
+                  <div class="budget-legend-label">Financial goals <span style="font-weight:400; font-size:11px; color:var(--text-muted);">emergency fund, retirement</span></div>
+                  <div class="budget-legend-val" id="alloc-goals">—</div>
                 </div>
-                <div class="budget-legend-pct">10%</div>
+                <div class="budget-legend-pct">20%</div>
               </div>
             </div>
           </div>
-          <p style="font-size:12px; color:var(--text-muted); margin-top:14px;">Based on <strong id="alloc-total">—</strong>/mo left over after expenses. Stop adding to emergency fund once you have 3 months of expenses saved (~<span id="emergency-goal">—</span>).</p>
+          <p style="font-size:12px; color:var(--text-muted); margin-top:14px;">Based on <strong id="alloc-total">—</strong>/mo left over after expenses.</p>
         </div>
       </div>
     </div>

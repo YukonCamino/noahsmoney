@@ -90,16 +90,16 @@ function recalc() {
   }
 
   // Allocation breakdown
-  var invest    = monthlySave * 0.50;
-  var emergency = monthlySave * 0.20;
-  var vehicle   = monthlySave * 0.20;
-  var fun       = monthlySave * 0.10;
-  document.getElementById('alloc-invest').textContent    = fmt(invest) + '/mo';
-  document.getElementById('alloc-emergency').textContent = fmt(emergency) + '/mo';
-  document.getElementById('alloc-vehicle').textContent   = fmt(vehicle) + '/mo';
-  document.getElementById('alloc-fun').textContent       = fmt(fun) + '/mo';
-  document.getElementById('alloc-total').textContent     = fmt(monthlySave);
-  document.getElementById('emergency-goal').textContent  = fmt(expenses * 3);
+  var ccPaid = localStorage.getItem('cc-paid') === '1';
+  var slice50 = monthlySave * 0.50;
+  var wants   = monthlySave * 0.30;
+  var goals   = monthlySave * 0.20;
+  document.getElementById('alloc-50-label').textContent = ccPaid ? 'Invest (Wealthfront)' : 'Credit card payoff';
+  document.getElementById('alloc-50').textContent    = fmt(slice50) + '/mo';
+  document.getElementById('alloc-wants').textContent  = fmt(wants) + '/mo';
+  document.getElementById('alloc-goals').textContent  = fmt(goals) + '/mo';
+  document.getElementById('alloc-total').textContent  = fmt(monthlySave);
+  document.getElementById('alloc-phase-label').textContent = ccPaid ? 'After payoff — how to split every month' : 'Right now — how to split every month';
 
   document.getElementById('total-income').textContent = fmt(totalIncome);
   document.getElementById('annual-income').textContent = fmt(totalIncome * 12);
@@ -168,6 +168,22 @@ showTab = function(id, btn) {
   }
 };
 
+function toggleCCPaid() {
+  var checked = document.getElementById('cc-paid-toggle').checked;
+  localStorage.setItem('cc-paid', checked ? '1' : '0');
+  document.getElementById('cc-stats-block').style.display = checked ? 'none' : '';
+  document.getElementById('cc-paid-badge').style.display  = checked ? 'inline-block' : 'none';
+  recalc();
+}
+
+function loadCCPaidState() {
+  var paid = localStorage.getItem('cc-paid') === '1';
+  document.getElementById('cc-paid-toggle').checked = paid;
+  document.getElementById('cc-stats-block').style.display = paid ? 'none' : '';
+  document.getElementById('cc-paid-badge').style.display  = paid ? 'inline-block' : 'none';
+}
+
 recalc();
 recalcMortgage();
 loadStepState();
+loadCCPaidState();
