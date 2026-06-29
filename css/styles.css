@@ -533,10 +533,10 @@ body {
   .calc-row { flex-direction: column; align-items: flex-start; gap: 6px; }
   .calc-input { width: 100%; text-align: left; }
 
-  /* Expense rows: keep side-by-side but tighten */
-  .calc-expense-row { gap: 8px; }
-  .calc-expense-label { font-size: 12px; min-width: 0; word-break: break-word; }
-  .calc-expense-input { width: 90px; font-size: 13px; padding: 7px 8px; }
+  /* Expense rows: label fills space, input is fixed 4-digit width */
+  .calc-expense-row { gap: 10px; align-items: center; }
+  .calc-expense-label { font-size: 13px; flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .calc-expense-input { width: 72px; flex-shrink: 0; font-size: 14px; padding: 7px 8px; text-align: right; }
 
   /* Loan paid-off checkbox — give it its own line */
   .loan-paid-label { display: flex; margin-left: 0; margin-top: 4px; }
