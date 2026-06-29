@@ -437,14 +437,16 @@
                 <div class="ef-goal-bar-track"><div class="ef-goal-bar-fill" id="ef-goal-bar-fill"></div></div>
                 <span class="ef-goal-label" id="ef-goal-label"></span>
               </div>
-              <div class="cc-toggle-wrap" style="padding:8px 0 2px;">
-                <label class="cc-toggle-label" style="font-size:13px;">
-                  <input type="checkbox" id="ef-reached-toggle" onchange="toggleEFReached()">
-                  <span class="cc-toggle-box"></span>
-                  <span id="ef-reached-text">Emergency fund goal reached</span>
-                </label>
-              </div>
             </div>
+          </div>
+
+          <!-- EF CHECKBOX — always visible so it can be unchecked -->
+          <div class="cc-toggle-wrap" style="padding:4px 0 8px;">
+            <label class="cc-toggle-label" style="font-size:13px;">
+              <input type="checkbox" id="ef-reached-toggle" onchange="toggleEFReached()">
+              <span class="cc-toggle-box"></span>
+              <span id="ef-reached-text">Emergency fund goal reached</span>
+            </label>
           </div>
 
         </div>
