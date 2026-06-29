@@ -401,33 +401,23 @@
             <div class="alloc-slider-amount" id="alloc-wants">—</div>
           </div>
 
-          <!-- GOALS SLIDER -->
-          <div class="alloc-slider-block">
+          <!-- SAFETY NET SLIDER (hidden once EF goal reached) -->
+          <div class="alloc-slider-block" id="safety-slider-block">
             <div class="alloc-slider-header">
               <span class="alloc-slider-dot" style="background:#3567B0;"></span>
-              <span class="alloc-slider-name">Safety Net &amp; Retirement</span>
-              <span class="alloc-rec-badge" id="rec-goals">Recommended: 25%</span>
-              <span class="alloc-slider-pct" id="pct-goals">25%</span>
+              <span class="alloc-slider-name">Safety Net <span style="font-weight:400; font-size:11px; color:var(--text-muted);">emergency fund</span></span>
+              <span class="alloc-rec-badge">Recommended: 15%</span>
+              <span class="alloc-slider-pct" id="pct-safety">15%</span>
             </div>
-            <div class="alloc-slider-wrap"><input type="range" class="alloc-slider" id="slider-goals" min="0" max="100" value="25" oninput="adjustSliders('goals')" onchange="adjustSliders('goals')"></div>
-            <div class="alloc-slider-amount" id="alloc-goals">—</div>
-            <div class="budget-goals-sub" style="margin-top:8px;">
-              <div class="budget-goals-row">
-                <span>Roth IRA <span style="font-size:10px; color:var(--text-muted); font-weight:400;">IRS max $7,500/yr</span></span>
-                <span id="alloc-roth">—</span>
-              </div>
-              <div class="budget-goals-row" id="roth-cap-warning" style="display:none;">
-                <span style="color:#b45309; font-size:11px;">⚠ Capped at $625/mo — IRS annual limit</span>
-                <span></span>
-              </div>
+            <div class="alloc-slider-wrap"><input type="range" class="alloc-slider" id="slider-safety" min="0" max="100" value="15" oninput="adjustSliders('safety')" onchange="adjustSliders('safety')"></div>
+            <div class="alloc-slider-amount" id="alloc-safety">—</div>
+            <div style="margin-top:6px;">
               <div class="budget-goals-row" id="emergency-row">
                 <span>Emergency fund <span class="ef-goal-badge" id="ef-goal-badge"></span></span>
                 <span id="alloc-emergency">—</span>
               </div>
               <div class="ef-goal-bar-wrap" id="ef-goal-bar-wrap">
-                <div class="ef-goal-bar-track">
-                  <div class="ef-goal-bar-fill" id="ef-goal-bar-fill"></div>
-                </div>
+                <div class="ef-goal-bar-track"><div class="ef-goal-bar-fill" id="ef-goal-bar-fill"></div></div>
                 <span class="ef-goal-label" id="ef-goal-label"></span>
               </div>
               <div class="cc-toggle-wrap" style="padding:8px 0 2px;">
@@ -438,6 +428,23 @@
                 </label>
               </div>
             </div>
+          </div>
+
+          <!-- RETIREMENT SLIDER -->
+          <div class="alloc-slider-block">
+            <div class="alloc-slider-header">
+              <span class="alloc-slider-dot" style="background:#6B46C1;"></span>
+              <span class="alloc-slider-name">Retirement <span style="font-weight:400; font-size:11px; color:var(--text-muted);">Roth IRA</span></span>
+              <span class="alloc-rec-badge" id="rec-retirement">Recommended: 10%</span>
+              <span class="alloc-slider-pct" id="pct-retirement">10%</span>
+            </div>
+            <div class="alloc-slider-wrap"><input type="range" class="alloc-slider" id="slider-retirement" min="0" max="100" value="10" oninput="adjustSliders('retirement')" onchange="adjustSliders('retirement')"></div>
+            <div class="alloc-slider-amount" id="alloc-roth">—</div>
+            <div class="budget-goals-row" id="roth-cap-warning" style="display:none; margin-top:4px;">
+              <span style="color:#b45309; font-size:11px;">⚠ Capped at $625/mo — IRS $7,500/yr limit</span>
+              <span></span>
+            </div>
+            <div style="font-size:10px; color:var(--text-muted); margin-top:4px;">IRS contribution max: $7,500/yr ($625/mo)</div>
           </div>
 
         </div>
