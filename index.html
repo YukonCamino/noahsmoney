@@ -423,65 +423,65 @@
     </div>
 
     <div class="section-block">
-      <div class="section-eyebrow">What can you afford?</div>
+      <div class="section-eyebrow">What can you qualify for?</div>
 
-      <div class="card" style="margin-bottom:1rem;">
-        <h3>Disability income alone (before graduation)</h3>
-        <p style="margin-bottom:10px;">With $1,600/mo disability income grossed up to ~$2,000 for qualifying purposes, here is the rough range with minimal other debt.</p>
-        <div class="home-grid">
-          <div class="home-card">
-            <div class="home-card-header conservative">Conservative</div>
-            <div class="home-card-body">
-              <div class="home-price">~$150,000</div>
-              <div class="home-detail">
-                <span>Monthly payment ~$850-$950</span>
-                <span>Limited inventory in most FL markets</span>
-                <span>Doable, but not ideal</span>
-              </div>
-            </div>
-          </div>
-          <div class="home-card">
-            <div class="home-card-header moderate">With savings as a cushion</div>
-            <div class="home-card-body">
-              <div class="home-price">~$175,000</div>
-              <div class="home-detail">
-                <span>Monthly payment ~$1,000-$1,100</span>
-                <span>Savings shows lender stability</span>
-                <span>Better than nothing, still limited</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div class="calc-wrap">
+        <div class="calc-header">🏠 Mortgage qualification calculator</div>
+        <div class="calc-body">
 
-      <div class="card">
-        <h3>After graduation, with a job added</h3>
-        <p style="margin-bottom:10px;">Adding employment income on top of disability changes the math significantly. Even a modest job makes a big difference.</p>
-        <div class="home-grid">
-          <div class="home-card">
-            <div class="home-card-header moderate">$1,600 disability + $2,000/mo job</div>
-            <div class="home-card-body">
-              <div class="home-price">~$220,000</div>
-              <div class="home-detail">
-                <span>Combined income ~$3,600/mo</span>
-                <span>Opens up much better inventory</span>
-                <span>Part-time or entry-level qualifies</span>
-              </div>
+          <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-muted); margin-bottom:10px;">Income — pulled from Phase 3 calculator</div>
+          <div class="calc-row">
+            <div class="calc-label">Monthly disability income
+              <span style="display:block; font-size:12px; font-weight:400; color:var(--text-muted); margin-top:2px;">Grossed up 25% by lenders since it's tax-free</span>
+            </div>
+            <input class="calc-input" type="number" id="m-disability" value="1600" oninput="recalcMortgage()">
+          </div>
+          <div class="calc-row">
+            <div class="calc-label">Monthly income from work</div>
+            <input class="calc-input" type="number" id="m-employment" value="2000" oninput="recalcMortgage()">
+          </div>
+
+          <div class="calc-divider"></div>
+          <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-muted); margin-bottom:10px;">Loan details</div>
+
+          <div class="calc-row">
+            <div class="calc-label">Interest rate (%)
+              <span style="display:block; font-size:12px; font-weight:400; color:var(--text-muted); margin-top:2px;">VA loans often run 0.25–0.5% below conventional</span>
+            </div>
+            <input class="calc-input" type="number" id="m-rate" value="6.5" step="0.1" oninput="recalcMortgage()">
+          </div>
+          <div class="calc-row">
+            <div class="calc-label">Down payment ($)
+              <span style="display:block; font-size:12px; font-weight:400; color:var(--text-muted); margin-top:2px;">VA loan requires $0 — but a down payment lowers your payment</span>
+            </div>
+            <input class="calc-input" type="number" id="m-down" value="0" oninput="recalcMortgage()">
+          </div>
+          <div class="calc-row">
+            <div class="calc-label">Other monthly debts (car, loans, etc.)</div>
+            <input class="calc-input" type="number" id="m-debts" value="217" oninput="recalcMortgage()">
+          </div>
+
+          <div class="calc-divider"></div>
+          <div class="calc-results">
+            <div class="calc-result-row">
+              <div class="calc-result-label">Total qualifying income</div>
+              <div class="calc-result-val gold" id="m-qualifying">—</div>
+            </div>
+            <div class="calc-result-row">
+              <div class="calc-result-label">Max monthly housing payment (41% DTI)</div>
+              <div class="calc-result-val gold" id="m-max-payment">—</div>
+            </div>
+            <div class="calc-result-row">
+              <div class="calc-result-label">Max loan amount</div>
+              <div class="calc-result-val green" id="m-max-loan">—</div>
+            </div>
+            <div class="calc-result-row">
+              <div class="calc-result-label">Max purchase price (loan + down payment)</div>
+              <div class="calc-result-val green" id="m-max-price">—</div>
             </div>
           </div>
-          <div class="home-card">
-            <div class="home-card-header stretch">$1,600 disability + $3,500/mo job</div>
-            <div class="home-card-body">
-              <div class="home-price">~$300,000+</div>
-              <div class="home-detail">
-                <span>Combined income ~$5,100/mo</span>
-                <span>Solid home in most FL markets</span>
-                <span>Realistic with a degree or trade cert</span>
-              </div>
-            </div>
-          </div>
+          <p style="font-size:12px; color:var(--text-muted); margin-top:14px;">Estimates based on a 30-year VA loan at the rate above, 41% DTI limit, and your disability income grossed up 25%. Actual approval depends on your credit score and the lender.</p>
         </div>
-        <p style="font-size:12px; color:var(--text-muted); margin-top:12px;">These are estimates based on current interest rates and minimal other debt. A lender will give you an exact number based on your actual credit score, debts, and the rate at the time you apply.</p>
       </div>
     </div>
 

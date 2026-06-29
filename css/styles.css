@@ -382,6 +382,15 @@ body {
 .overview-cta { font-size: 12px; font-weight: 600; color: var(--blue-mid); }
 .overview-step:hover .overview-cta { color: var(--navy); }
 
+/* CALC RESULTS */
+.calc-divider { border:none; border-top:1px solid var(--border); margin:18px 0; }
+.calc-results { display:flex; flex-direction:column; gap:10px; }
+.calc-result-row { display:flex; justify-content:space-between; align-items:center; padding:10px 14px; background:var(--surface); border-radius:var(--radius); }
+.calc-result-label { font-size:13px; color:var(--text-soft); }
+.calc-result-val { font-size:18px; font-weight:700; }
+.calc-result-val.gold { color:var(--gold); }
+.calc-result-val.green { color:var(--green); }
+
 /* BUDGET */
 .budget-phase {
   background: var(--white);

@@ -125,5 +125,49 @@ function recalc() {
   setBar('bar-4', 'bar-4-val', y4);
 }
 
+function recalcMortgage() {
+  var disability  = parseFloat(document.getElementById('m-disability').value) || 0;
+  var employment  = parseFloat(document.getElementById('m-employment').value) || 0;
+  var annualRate  = parseFloat(document.getElementById('m-rate').value) || 6.5;
+  var downPayment = parseFloat(document.getElementById('m-down').value) || 0;
+  var otherDebts  = parseFloat(document.getElementById('m-debts').value) || 0;
+
+  // VA lenders gross up tax-free disability income by 25%
+  var grossedDisability = disability * 1.25;
+  var qualifying = grossedDisability + employment;
+
+  // VA DTI limit: 41%
+  var maxTotalDebt = qualifying * 0.41;
+  var maxMortgagePayment = Math.max(maxTotalDebt - otherDebts, 0);
+
+  // Max loan via standard amortization inverse (30yr)
+  var r = (annualRate / 100) / 12;
+  var n = 360;
+  var maxLoan = 0;
+  if (r > 0 && maxMortgagePayment > 0) {
+    maxLoan = maxMortgagePayment * ((Math.pow(1 + r, n) - 1) / (r * Math.pow(1 + r, n)));
+  }
+  var maxPrice = maxLoan + downPayment;
+
+  document.getElementById('m-qualifying').textContent   = fmt(qualifying) + '/mo';
+  document.getElementById('m-max-payment').textContent  = fmt(maxMortgagePayment) + '/mo';
+  document.getElementById('m-max-loan').textContent     = fmt(maxLoan);
+  document.getElementById('m-max-price').textContent    = fmt(maxPrice);
+}
+
+// Sync Phase 4 income inputs from Phase 3 when switching tabs
+var _origShowTab = showTab;
+showTab = function(id, btn) {
+  _origShowTab(id, btn);
+  if (id === 'phase4') {
+    var d = parseFloat(document.getElementById('disability').value) || 0;
+    var e = parseFloat(document.getElementById('employment').value) || 0;
+    document.getElementById('m-disability').value = d;
+    document.getElementById('m-employment').value = e;
+    recalcMortgage();
+  }
+};
+
 recalc();
+recalcMortgage();
 loadStepState();
