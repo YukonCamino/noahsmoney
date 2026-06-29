@@ -1,4 +1,4 @@
-var allocPcts = { invest: 50, wants: 30, goals: 20 };
+var allocPcts = { invest: 50, wants: 25, goals: 25 };
 
 function adjustSliders(changed) {
   var keys = ['invest', 'wants', 'goals'];
