@@ -558,8 +558,7 @@ body {
   .calc-result-val { font-size: 15px; }
 
   /* Budget sliders */
-  .alloc-slider-header { gap: 6px; }
-  .alloc-rec-badge { display: none; }
+  .alloc-slider-header { gap: 4px; }
   .alloc-slider-pct { font-size: 14px; }
 
   /* Budget donut — hide on mobile, sliders are enough */
