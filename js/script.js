@@ -53,29 +53,19 @@ function recalc() {
 
   var totalIncome  = disability + gibill + books + employment;
   var monthlySave  = Math.max(totalIncome - expenses, 0);
-  // Compound at 7% annual return, contributing monthlySave for 10 months per year
-  var monthlyRate = 0.07 / 12;
-  var balance = 0;
-  var yearBalances = [];
-  for (var yr = 0; yr < 4; yr++) {
-    for (var mo = 0; mo < 12; mo++) {
-      balance = balance * (1 + monthlyRate);
-      if (mo < 10) balance += monthlySave;
-    }
-    yearBalances.push(balance);
-  }
 
-  // Credit card payoff calc ($5,231 at 20% APR)
+  // Credit card payoff calc ($5,231 at 20% APR — using 50% of surplus as the CC payment)
   var ccBalance = 5231;
   var ccRate = 0.20 / 12;
   var ccMonths = 0;
   var ccInterest = 0;
+  var ccPayment = monthlySave * 0.50;
   var b = ccBalance;
-  if (monthlySave > b * ccRate) {
+  if (ccPayment > b * ccRate) {
     while (b > 0 && ccMonths < 120) {
       var interest = b * ccRate;
       ccInterest += interest;
-      b = b + interest - monthlySave;
+      b = b + interest - ccPayment;
       ccMonths++;
     }
     var freeDate = new Date();
@@ -94,12 +84,33 @@ function recalc() {
   var slice50 = monthlySave * 0.50;
   var wants   = monthlySave * 0.30;
   var goals   = monthlySave * 0.20;
+  var rothIRA = Math.min(200, goals);
+  var emergencyFund = Math.max(goals - 200, 0);
   document.getElementById('alloc-50-label').textContent = ccPaid ? 'Invest (Wealthfront)' : 'Credit card payoff';
-  document.getElementById('alloc-50').textContent    = fmt(slice50) + '/mo';
-  document.getElementById('alloc-wants').textContent  = fmt(wants) + '/mo';
-  document.getElementById('alloc-goals').textContent  = fmt(goals) + '/mo';
-  document.getElementById('alloc-total').textContent  = fmt(monthlySave);
+  document.getElementById('alloc-50').textContent       = fmt(slice50) + '/mo';
+  document.getElementById('alloc-wants').textContent    = fmt(wants) + '/mo';
+  document.getElementById('alloc-goals').textContent    = fmt(goals) + '/mo';
+  document.getElementById('alloc-roth').textContent     = fmt(rothIRA) + '/mo';
+  document.getElementById('alloc-emergency').textContent = fmt(emergencyFund) + '/mo';
+  document.getElementById('alloc-total').textContent    = fmt(monthlySave);
   document.getElementById('alloc-phase-label').textContent = ccPaid ? 'After payoff — how to split every month' : 'Right now — how to split every month';
+
+  // Savings chart: use 50% of surplus as the invest amount
+  // CC is paid off in ccMonths months (or 0 if already marked paid)
+  var investAmount = monthlySave * 0.50;
+  var delayMonths  = ccPaid ? 0 : ccMonths;
+  var monthlyRate  = 0.07 / 12;
+  var balance = 0;
+  var yearBalances = [];
+  var elapsed = 0;
+  for (var yr = 0; yr < 4; yr++) {
+    for (var mo = 0; mo < 12; mo++) {
+      balance = balance * (1 + monthlyRate);
+      if (mo < 10 && elapsed >= delayMonths) balance += investAmount;
+      elapsed++;
+    }
+    yearBalances.push(balance);
+  }
 
   document.getElementById('total-income').textContent = fmt(totalIncome);
   document.getElementById('annual-income').textContent = fmt(totalIncome * 12);
