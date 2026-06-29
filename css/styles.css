@@ -390,6 +390,9 @@ body {
 .calc-result-val { font-size:18px; font-weight:700; }
 .calc-result-val.gold { color:var(--gold); }
 .calc-result-val.green { color:var(--green); }
+.hero-save { background:#1A6B45; border-radius:var(--radius); padding:16px 18px; }
+.hero-save-label { font-size:14px; font-weight:600; color:rgba(255,255,255,0.85); }
+.hero-save-val { font-size:28px; font-weight:700; color:#fff; }
 
 /* BUDGET */
 .budget-phase {
