@@ -442,8 +442,8 @@ body {
   letter-spacing: 0.02em;
 }
 .budget-phase-body { padding: 16px; }
-.cc-summary-line { font-size: 13px; color: var(--text-soft); margin-bottom: 10px; line-height: 1.6; }
-.cc-summary-line strong { color: var(--navy); }
+.cc-chip { display:inline-flex; align-items:center; margin-top:8px; background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:5px 12px; font-size:12px; color:var(--text-soft); line-height:1.4; }
+.cc-chip strong { color:var(--navy); }
 .budget-split { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
 .budget-donut-wrap { flex-shrink: 0; }
 .budget-donut {
