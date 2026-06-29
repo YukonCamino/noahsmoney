@@ -442,8 +442,14 @@ body {
   letter-spacing: 0.02em;
 }
 .budget-phase-body { padding: 16px; }
-.cc-chip { display:inline-flex; align-items:center; margin-top:8px; background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:5px 12px; font-size:12px; color:var(--text-soft); line-height:1.4; }
-.cc-chip strong { color:var(--navy); }
+.priority-card { background:var(--white); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; margin-bottom:4px; }
+.priority-card-header { background:var(--navy); color:white; font-size:12px; font-weight:600; padding:8px 14px; letter-spacing:0.02em; }
+.priority-card-stats { display:flex; gap:0; }
+.priority-stat { flex:1; padding:12px 14px; border-right:1px solid var(--border); }
+.priority-stat:last-child { border-right:none; }
+.priority-stat-val { display:block; font-size:16px; font-weight:700; color:var(--navy); }
+.priority-stat-label { display:block; font-size:10px; text-transform:uppercase; letter-spacing:0.05em; color:var(--text-muted); margin-top:2px; }
+.priority-card .cc-toggle-wrap { padding:10px 14px 12px; border-top:1px solid var(--border); }
 .budget-split { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
 .budget-donut-wrap { flex-shrink: 0; }
 .budget-donut {

@@ -342,9 +342,27 @@
       <div class="section-eyebrow">How to spend what's left over</div>
       <div class="section-title">Your Budget</div>
 
+      <!-- CC PRIORITY CARD -->
+      <div class="priority-card" id="cc-stats-block">
+        <div class="priority-card-header">Priority #1 — Credit card payoff</div>
+        <div class="priority-card-stats">
+          <div class="priority-stat"><span class="priority-stat-val" id="cc-months">—</span><span class="priority-stat-label">months to pay off</span></div>
+          <div class="priority-stat"><span class="priority-stat-val" id="cc-interest">—</span><span class="priority-stat-label">total interest</span></div>
+          <div class="priority-stat"><span class="priority-stat-val" id="cc-free-date">—</span><span class="priority-stat-label">debt-free date</span></div>
+        </div>
+        <div class="cc-toggle-wrap" style="padding:10px 0 0;">
+          <label class="cc-toggle-label" id="cc-toggle-label">
+            <input type="checkbox" id="cc-paid-toggle" onchange="toggleCCPaid()">
+            <span class="cc-toggle-box"></span>
+            Credit card is paid off
+          </label>
+          <span class="cc-paid-badge" id="cc-paid-badge">🎉 Debt free!</span>
+        </div>
+      </div>
+
       <!-- ALLOCATION SLIDERS -->
-      <div class="budget-phase" style="margin-top:0.5rem;">
-        <div class="budget-phase-label" id="alloc-phase-label">Right now — how to split every month</div>
+      <div class="budget-phase" style="margin-top:0.75rem;">
+        <div class="budget-phase-label" id="alloc-phase-label">How to split every month</div>
         <div class="budget-phase-body">
           <p style="font-size:12px; color:var(--text-muted); margin-bottom:16px;">Based on <strong id="alloc-total">—</strong>/mo left over after expenses. Drag to adjust — sliders always add up to 100%.</p>
 
@@ -353,23 +371,11 @@
             <div class="alloc-slider-header">
               <span class="alloc-slider-dot" style="background:#1A6B45;"></span>
               <span class="alloc-slider-name" id="alloc-50-label">Credit card payoff</span>
-              <span class="alloc-rec-badge">Recommended: 50% to reach your home goal</span>
+              <span class="alloc-rec-badge">Recommended: 50%</span>
               <span class="alloc-slider-pct" id="pct-invest">50%</span>
             </div>
             <input type="range" class="alloc-slider" id="slider-invest" min="0" max="100" value="50" oninput="adjustSliders('invest')">
             <div class="alloc-slider-amount" id="alloc-50">—</div>
-            <!-- CC chip + paid-off toggle -->
-            <div class="cc-chip" id="cc-stats-block">
-              <span>Paid off in <strong id="cc-months">—</strong> mo &nbsp;·&nbsp; <strong id="cc-interest">—</strong> interest &nbsp;·&nbsp; debt-free <strong id="cc-free-date">—</strong></span>
-            </div>
-            <div class="cc-toggle-wrap" style="padding:8px 0 0;">
-              <label class="cc-toggle-label" id="cc-toggle-label">
-                <input type="checkbox" id="cc-paid-toggle" onchange="toggleCCPaid()">
-                <span class="cc-toggle-box"></span>
-                Credit card is paid off
-              </label>
-              <span class="cc-paid-badge" id="cc-paid-badge">🎉 Debt free!</span>
-            </div>
           </div>
 
           <!-- WANTS SLIDER -->
