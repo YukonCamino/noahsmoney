@@ -409,10 +409,21 @@
                       <span>Roth IRA</span>
                       <span id="alloc-roth">—</span>
                     </div>
-                    <div class="budget-goals-row">
-                      <span>Emergency fund</span>
+                    <div class="budget-goals-row" id="emergency-row">
+                      <span>Emergency fund <span class="ef-goal-badge" id="ef-goal-badge"></span></span>
                       <span id="alloc-emergency">—</span>
                     </div>
+                    <div class="ef-goal-bar-wrap" id="ef-goal-bar-wrap">
+                      <div class="ef-goal-bar-track">
+                        <div class="ef-goal-bar-fill" id="ef-goal-bar-fill"></div>
+                      </div>
+                      <span class="ef-goal-label" id="ef-goal-label"></span>
+                    </div>
+                    <label class="ef-reached-label" id="ef-reached-wrap">
+                      <input type="checkbox" id="ef-reached-toggle" onchange="toggleEFReached()">
+                      <span class="loan-paid-box"></span>
+                      <span class="ef-reached-text" id="ef-reached-text">goal reached — redirect to investments</span>
+                    </label>
                   </div>
                 </div>
                 <div class="budget-legend-pct">20%</div>

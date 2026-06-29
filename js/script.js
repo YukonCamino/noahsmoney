@@ -84,16 +84,28 @@ function recalc() {
   var slice50 = monthlySave * 0.50;
   var wants   = monthlySave * 0.30;
   var goals   = monthlySave * 0.20;
-  var rothIRA = Math.min(200, goals);
-  var emergencyFund = Math.max(goals - 200, 0);
-  document.getElementById('alloc-50-label').textContent = ccPaid ? 'Invest (Wealthfront)' : 'Credit card payoff';
-  document.getElementById('alloc-50').textContent       = fmt(slice50) + '/mo';
-  document.getElementById('alloc-wants').textContent    = fmt(wants) + '/mo';
-  document.getElementById('alloc-goals').textContent    = fmt(goals) + '/mo';
-  document.getElementById('alloc-roth').textContent     = fmt(rothIRA) + '/mo';
-  document.getElementById('alloc-emergency').textContent = fmt(emergencyFund) + '/mo';
-  document.getElementById('alloc-total').textContent    = fmt(monthlySave);
+  var efReached  = localStorage.getItem('ef-reached') === '1';
+  var rothIRA    = Math.min(200, goals);
+  var efAlloc    = efReached ? 0 : Math.max(goals - 200, 0);
+  var invest50   = efReached ? slice50 + Math.max(goals - 200, 0) : slice50;
+  var efGoal     = expenses * 3;
+
+  document.getElementById('alloc-50-label').textContent   = ccPaid ? 'Invest (Wealthfront)' : 'Credit card payoff';
+  document.getElementById('alloc-50').textContent          = fmt(invest50) + '/mo';
+  document.getElementById('alloc-wants').textContent       = fmt(wants) + '/mo';
+  document.getElementById('alloc-goals').textContent       = fmt(goals) + '/mo';
+  document.getElementById('alloc-roth').textContent        = fmt(rothIRA) + '/mo';
+  document.getElementById('alloc-emergency').textContent   = efReached ? '$0/mo' : fmt(efAlloc) + '/mo';
+  document.getElementById('alloc-total').textContent       = fmt(monthlySave);
   document.getElementById('alloc-phase-label').textContent = ccPaid ? 'After payoff — how to split every month' : 'Right now — how to split every month';
+
+  // Emergency fund goal progress
+  document.getElementById('ef-goal-badge').textContent = 'Goal: ' + fmt(efGoal);
+  document.getElementById('ef-goal-label').textContent  = fmt(efGoal) + ' = 3 months of expenses';
+  document.getElementById('ef-reached-toggle').checked  = efReached;
+  document.getElementById('ef-reached-text').textContent = efReached ? '✓ goal reached — adding to investments' : 'goal reached — redirect to investments';
+  document.getElementById('emergency-row').style.opacity = efReached ? '0.45' : '1';
+  document.getElementById('ef-goal-bar-wrap').style.display = efReached ? 'none' : '';
 
   // Savings chart: use 50% of surplus as the invest amount
   // CC is paid off in ccMonths months (or 0 if already marked paid)
@@ -178,6 +190,12 @@ showTab = function(id, btn) {
     recalcMortgage();
   }
 };
+
+function toggleEFReached() {
+  var checked = document.getElementById('ef-reached-toggle').checked;
+  localStorage.setItem('ef-reached', checked ? '1' : '0');
+  recalc();
+}
 
 function toggleLoanPaid() {
   var checked = document.getElementById('loan-paid-toggle').checked;

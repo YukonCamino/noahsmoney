@@ -475,6 +475,14 @@ body {
 .budget-goals-row { display: flex; gap: 8px; font-size: 11px; color: var(--text-muted); }
 .budget-goals-row span:first-child { flex: 1; }
 .budget-goals-row span:last-child { font-weight: 600; color: var(--navy); }
+.ef-goal-badge { font-size:10px; font-weight:600; color:#3567B0; background:#e8f0fb; padding:1px 6px; border-radius:10px; margin-left:4px; }
+.ef-goal-bar-wrap { margin-top:6px; display:flex; align-items:center; gap:8px; }
+.ef-goal-bar-track { flex:1; height:5px; background:var(--border); border-radius:3px; overflow:hidden; }
+.ef-goal-bar-fill { height:100%; background:#3567B0; border-radius:3px; width:0%; transition:width 0.3s; }
+.ef-goal-label { font-size:10px; color:var(--text-muted); white-space:nowrap; }
+.ef-reached-label { display:inline-flex; align-items:center; gap:6px; margin-top:7px; cursor:pointer; user-select:none; font-size:11px; color:var(--text-muted); }
+.ef-reached-label input { display:none; }
+.ef-reached-label input:checked ~ .ef-reached-text { color:#1A6B45; font-weight:600; }
 
 /* FOOTER */
 .footer {
