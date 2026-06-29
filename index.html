@@ -374,63 +374,71 @@
         <span class="cc-paid-badge" id="cc-paid-badge">🎉 Debt free!</span>
       </div>
 
-      <!-- ALLOCATION PIE -->
+      <!-- ALLOCATION SLIDERS -->
       <div class="budget-phase" style="margin-top:0.5rem;">
         <div class="budget-phase-label" id="alloc-phase-label">Right now — how to split every month</div>
         <div class="budget-phase-body">
-          <div class="budget-split">
-            <div class="budget-donut-wrap">
-              <div class="budget-donut" id="budget-donut"></div>
+          <p style="font-size:12px; color:var(--text-muted); margin-bottom:16px;">Based on <strong id="alloc-total">—</strong>/mo left over after expenses. Drag to adjust — sliders always add up to 100%.</p>
+
+          <!-- INVEST SLIDER -->
+          <div class="alloc-slider-block">
+            <div class="alloc-slider-header">
+              <span class="alloc-slider-dot" style="background:#1A6B45;"></span>
+              <span class="alloc-slider-name" id="alloc-50-label">Invest (Wealthfront)</span>
+              <span class="alloc-rec-badge">Recommended: 50% to reach your home goal</span>
+              <span class="alloc-slider-pct" id="pct-invest">50%</span>
             </div>
-            <div class="budget-legend">
-              <div class="budget-legend-item">
-                <div class="budget-legend-dot" style="background:#1A6B45;"></div>
-                <div>
-                  <div class="budget-legend-label" id="alloc-50-label">Credit card payoff</div>
-                  <div class="budget-legend-val" id="alloc-50">—</div>
-                </div>
-                <div class="budget-legend-pct">50%</div>
+            <input type="range" class="alloc-slider" id="slider-invest" min="0" max="100" value="50" oninput="adjustSliders('invest')">
+            <div class="alloc-slider-amount" id="alloc-50">—</div>
+          </div>
+
+          <!-- WANTS SLIDER -->
+          <div class="alloc-slider-block">
+            <div class="alloc-slider-header">
+              <span class="alloc-slider-dot" style="background:#C9971C;"></span>
+              <span class="alloc-slider-name">Wants <span style="font-weight:400; font-size:11px; color:var(--text-muted);">dining, travel, hobbies, shopping</span></span>
+              <span class="alloc-rec-badge">Recommended: 30%</span>
+              <span class="alloc-slider-pct" id="pct-wants">30%</span>
+            </div>
+            <input type="range" class="alloc-slider" id="slider-wants" min="0" max="100" value="30" oninput="adjustSliders('wants')">
+            <div class="alloc-slider-amount" id="alloc-wants">—</div>
+          </div>
+
+          <!-- GOALS SLIDER -->
+          <div class="alloc-slider-block">
+            <div class="alloc-slider-header">
+              <span class="alloc-slider-dot" style="background:#3567B0;"></span>
+              <span class="alloc-slider-name">Financial goals</span>
+              <span class="alloc-rec-badge">Recommended: 20%</span>
+              <span class="alloc-slider-pct" id="pct-goals">20%</span>
+            </div>
+            <input type="range" class="alloc-slider" id="slider-goals" min="0" max="100" value="20" oninput="adjustSliders('goals')">
+            <div class="alloc-slider-amount" id="alloc-goals">—</div>
+            <div class="budget-goals-sub" style="margin-top:8px;">
+              <div class="budget-goals-row">
+                <span>Roth IRA</span>
+                <span id="alloc-roth">—</span>
               </div>
-              <div class="budget-legend-item">
-                <div class="budget-legend-dot" style="background:#C9971C;"></div>
-                <div>
-                  <div class="budget-legend-label">Wants <span style="font-weight:400; font-size:11px; color:var(--text-muted);">dining, travel, hobbies, shopping</span></div>
-                  <div class="budget-legend-val" id="alloc-wants">—</div>
-                </div>
-                <div class="budget-legend-pct">30%</div>
+              <div class="budget-goals-row" id="emergency-row">
+                <span>Emergency fund <span class="ef-goal-badge" id="ef-goal-badge"></span></span>
+                <span id="alloc-emergency">—</span>
               </div>
-              <div class="budget-legend-item" style="align-items:flex-start;">
-                <div class="budget-legend-dot" style="background:#3567B0; margin-top:3px;"></div>
-                <div style="flex:1;">
-                  <div class="budget-legend-label">Financial goals</div>
-                  <div class="budget-legend-val" id="alloc-goals">—</div>
-                  <div class="budget-goals-sub">
-                    <div class="budget-goals-row">
-                      <span>Roth IRA</span>
-                      <span id="alloc-roth">—</span>
-                    </div>
-                    <div class="budget-goals-row" id="emergency-row">
-                      <span>Emergency fund <span class="ef-goal-badge" id="ef-goal-badge"></span></span>
-                      <span id="alloc-emergency">—</span>
-                    </div>
-                    <div class="ef-goal-bar-wrap" id="ef-goal-bar-wrap">
-                      <div class="ef-goal-bar-track">
-                        <div class="ef-goal-bar-fill" id="ef-goal-bar-fill"></div>
-                      </div>
-                      <span class="ef-goal-label" id="ef-goal-label"></span>
-                    </div>
-                    <label class="ef-reached-label" id="ef-reached-wrap">
-                      <input type="checkbox" id="ef-reached-toggle" onchange="toggleEFReached()">
-                      <span class="loan-paid-box"></span>
-                      <span class="ef-reached-text" id="ef-reached-text">goal reached — redirect to investments</span>
-                    </label>
-                  </div>
+              <div class="ef-goal-bar-wrap" id="ef-goal-bar-wrap">
+                <div class="ef-goal-bar-track">
+                  <div class="ef-goal-bar-fill" id="ef-goal-bar-fill"></div>
                 </div>
-                <div class="budget-legend-pct">20%</div>
+                <span class="ef-goal-label" id="ef-goal-label"></span>
+              </div>
+              <div class="cc-toggle-wrap" style="padding:8px 0 2px;">
+                <label class="cc-toggle-label" style="font-size:13px;">
+                  <input type="checkbox" id="ef-reached-toggle" onchange="toggleEFReached()">
+                  <span class="cc-toggle-box"></span>
+                  <span id="ef-reached-text">Emergency fund goal reached</span>
+                </label>
               </div>
             </div>
           </div>
-          <p style="font-size:12px; color:var(--text-muted); margin-top:14px;">Based on <strong id="alloc-total">—</strong>/mo left over after expenses.</p>
+
         </div>
       </div>
     </div>

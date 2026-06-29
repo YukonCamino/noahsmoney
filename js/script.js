@@ -1,3 +1,37 @@
+var allocPcts = { invest: 50, wants: 30, goals: 20 };
+
+function adjustSliders(changed) {
+  var keys = ['invest', 'wants', 'goals'];
+  var newVal = parseInt(document.getElementById('slider-' + changed).value);
+  var oldVal = allocPcts[changed];
+  var delta = newVal - oldVal;
+  allocPcts[changed] = newVal;
+
+  var others = keys.filter(function(k) { return k !== changed; });
+  var othersSum = others.reduce(function(s, k) { return s + allocPcts[k]; }, 0);
+
+  if (othersSum > 0) {
+    others.forEach(function(k) {
+      allocPcts[k] = Math.max(0, allocPcts[k] - delta * (allocPcts[k] / othersSum));
+    });
+  } else if (delta < 0) {
+    others.forEach(function(k) { allocPcts[k] = (-delta) / others.length; });
+  }
+
+  // Normalize so they sum to exactly 100
+  var total = keys.reduce(function(s, k) { return s + allocPcts[k]; }, 0);
+  keys.forEach(function(k) { allocPcts[k] = Math.round(allocPcts[k] / total * 100); });
+  var sum = keys.reduce(function(s, k) { return s + allocPcts[k]; }, 0);
+  allocPcts[changed] += 100 - sum;
+
+  keys.forEach(function(k) {
+    document.getElementById('slider-' + k).value = allocPcts[k];
+    document.getElementById('pct-' + k).textContent = allocPcts[k] + '%';
+  });
+
+  recalc();
+}
+
 function addExpense() {
   var container = document.getElementById('extra-expenses');
   var row = document.createElement('div');
@@ -80,15 +114,15 @@ function recalc() {
   }
 
   // Allocation breakdown
-  var ccPaid = localStorage.getItem('cc-paid') === '1';
-  var slice50 = monthlySave * 0.50;
-  var wants   = monthlySave * 0.30;
-  var goals   = monthlySave * 0.20;
-  var efReached  = localStorage.getItem('ef-reached') === '1';
-  var rothIRA    = Math.min(200, goals);
-  var efAlloc    = efReached ? 0 : Math.max(goals - 200, 0);
-  var invest50   = efReached ? slice50 + Math.max(goals - 200, 0) : slice50;
-  var efGoal     = expenses * 3;
+  var ccPaid    = localStorage.getItem('cc-paid') === '1';
+  var efReached = localStorage.getItem('ef-reached') === '1';
+  var slice50   = monthlySave * (allocPcts.invest / 100);
+  var wants     = monthlySave * (allocPcts.wants  / 100);
+  var goals     = monthlySave * (allocPcts.goals  / 100);
+  var rothIRA   = Math.min(200, goals);
+  var efAlloc   = efReached ? 0 : Math.max(goals - 200, 0);
+  var invest50  = efReached ? slice50 + Math.max(goals - 200, 0) : slice50;
+  var efGoal    = expenses * 3;
 
   document.getElementById('alloc-50-label').textContent   = ccPaid ? 'Invest (Wealthfront)' : 'Credit card payoff';
   document.getElementById('alloc-50').textContent          = fmt(invest50) + '/mo';
@@ -100,16 +134,15 @@ function recalc() {
   document.getElementById('alloc-phase-label').textContent = ccPaid ? 'After payoff — how to split every month' : 'Right now — how to split every month';
 
   // Emergency fund goal progress
-  document.getElementById('ef-goal-badge').textContent = 'Goal: ' + fmt(efGoal);
-  document.getElementById('ef-goal-label').textContent  = fmt(efGoal) + ' = 3 months of expenses';
-  document.getElementById('ef-reached-toggle').checked  = efReached;
-  document.getElementById('ef-reached-text').textContent = efReached ? '✓ goal reached — adding to investments' : 'goal reached — redirect to investments';
-  document.getElementById('emergency-row').style.opacity = efReached ? '0.45' : '1';
+  document.getElementById('ef-goal-badge').textContent     = 'Goal: ' + fmt(efGoal);
+  document.getElementById('ef-goal-label').textContent     = fmt(efGoal) + ' = 3 months of expenses';
+  document.getElementById('ef-reached-toggle').checked     = efReached;
+  document.getElementById('ef-reached-text').textContent   = efReached ? 'Emergency fund goal reached' : 'Emergency fund goal reached';
+  document.getElementById('emergency-row').style.opacity   = efReached ? '0.45' : '1';
   document.getElementById('ef-goal-bar-wrap').style.display = efReached ? 'none' : '';
 
-  // Savings chart: use 50% of surplus as the invest amount
-  // CC is paid off in ccMonths months (or 0 if already marked paid)
-  var investAmount = monthlySave * 0.50;
+  // Savings chart uses the invest slice amount
+  var investAmount = invest50;
   var delayMonths  = ccPaid ? 0 : ccMonths;
   var monthlyRate  = 0.07 / 12;
   var balance = 0;
