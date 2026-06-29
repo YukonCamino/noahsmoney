@@ -442,13 +442,8 @@ body {
   letter-spacing: 0.02em;
 }
 .budget-phase-body { padding: 16px; }
-.budget-cc-info {
-  display: flex;
-  gap: 24px;
-  flex-wrap: wrap;
-}
-.budget-stat-val { font-size: 22px; font-weight: 600; color: var(--navy); display: block; }
-.budget-stat-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.cc-summary-line { font-size: 13px; color: var(--text-soft); margin-bottom: 10px; line-height: 1.6; }
+.cc-summary-line strong { color: var(--navy); }
 .budget-split { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
 .budget-donut-wrap { flex-shrink: 0; }
 .budget-donut {
