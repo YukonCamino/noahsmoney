@@ -258,7 +258,6 @@ function loadLoanPaidState() {
 function toggleCCPaid() {
   var checked = document.getElementById('cc-paid-toggle').checked;
   localStorage.setItem('cc-paid', checked ? '1' : '0');
-  document.getElementById('cc-stats-block').style.display = checked ? 'none' : '';
   document.getElementById('cc-paid-badge').style.display  = checked ? 'inline-block' : 'none';
   recalc();
 }
@@ -266,7 +265,6 @@ function toggleCCPaid() {
 function loadCCPaidState() {
   var paid = localStorage.getItem('cc-paid') === '1';
   document.getElementById('cc-paid-toggle').checked = paid;
-  document.getElementById('cc-stats-block').style.display = paid ? 'none' : '';
   document.getElementById('cc-paid-badge').style.display  = paid ? 'inline-block' : 'none';
 }
 
