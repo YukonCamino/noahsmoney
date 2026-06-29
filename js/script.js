@@ -1,10 +1,15 @@
-var allocPcts = { invest: 50, wants: 25, goals: 25 };
+var allocPcts = { invest: 50, wants: 25, safety: 15, retirement: 10 };
+
+function activeKeys() {
+  var efReached = localStorage.getItem('ef-reached') === '1';
+  return efReached ? ['invest', 'wants', 'retirement'] : ['invest', 'wants', 'safety', 'retirement'];
+}
 
 function adjustSliders(changed) {
-  var keys = ['invest', 'wants', 'goals'];
+  var keys = activeKeys();
+  if (keys.indexOf(changed) === -1) return;
   var newVal = parseInt(document.getElementById('slider-' + changed).value);
-  var oldVal = allocPcts[changed];
-  var delta = newVal - oldVal;
+  var delta = newVal - allocPcts[changed];
   allocPcts[changed] = newVal;
 
   var others = keys.filter(function(k) { return k !== changed; });
@@ -18,7 +23,6 @@ function adjustSliders(changed) {
     others.forEach(function(k) { allocPcts[k] = (-delta) / others.length; });
   }
 
-  // Normalize so they sum to exactly 100
   var total = keys.reduce(function(s, k) { return s + allocPcts[k]; }, 0);
   keys.forEach(function(k) { allocPcts[k] = Math.round(allocPcts[k] / total * 100); });
   var sum = keys.reduce(function(s, k) { return s + allocPcts[k]; }, 0);
@@ -116,43 +120,44 @@ function recalc() {
   // Allocation breakdown
   var ccPaid    = localStorage.getItem('cc-paid') === '1';
   var efReached = localStorage.getItem('ef-reached') === '1';
-  var slice50   = monthlySave * (allocPcts.invest / 100);
-  var wants     = monthlySave * (allocPcts.wants  / 100);
-  var goals     = monthlySave * (allocPcts.goals  / 100);
-  var rothMax   = 625; // $7,500/yr IRS limit
-  var rothIRA   = efReached ? Math.min(goals, rothMax) : Math.min(200, goals);
-  var efAlloc   = efReached ? 0 : Math.max(goals - 200, 0);
-  var invest50  = slice50;
-  var rothCapped = efReached && goals > rothMax;
-
-  // Cap the goals slider max so Roth can't exceed $625/mo when EF is reached
-  var maxGoalsPct = efReached ? Math.min(100, Math.floor(rothMax / (monthlySave || 1) * 100)) : 100;
-  var goalsSlider = document.getElementById('slider-goals');
-  goalsSlider.max = maxGoalsPct;
-  if (allocPcts.goals > maxGoalsPct) {
-    allocPcts.goals = maxGoalsPct;
-    goalsSlider.value = maxGoalsPct;
-    document.getElementById('pct-goals').textContent = maxGoalsPct + '%';
-  }
-  document.getElementById('roth-cap-warning').style.display = rothCapped ? '' : 'none';
+  var invest50  = monthlySave * (allocPcts.invest     / 100);
+  var wants     = monthlySave * (allocPcts.wants      / 100);
+  var safetyAmt = monthlySave * (allocPcts.safety     / 100);
+  var rothMax   = 625;
+  var rothRaw   = monthlySave * (allocPcts.retirement / 100);
+  var rothIRA   = Math.min(rothRaw, rothMax);
+  var rothCapped = rothRaw > rothMax;
   var efGoal    = expenses * 3;
 
+  // Cap retirement slider so Roth never exceeds $625/mo
+  var maxRetPct = Math.min(100, Math.floor(rothMax / (monthlySave || 1) * 100));
+  var retSlider = document.getElementById('slider-retirement');
+  retSlider.max = maxRetPct;
+  if (allocPcts.retirement > maxRetPct) {
+    allocPcts.retirement = maxRetPct;
+    retSlider.value = maxRetPct;
+    document.getElementById('pct-retirement').textContent = maxRetPct + '%';
+  }
+  document.getElementById('roth-cap-warning').style.display = rothCapped ? '' : 'none';
+
+  // Show/hide safety net slider
+  document.getElementById('safety-slider-block').style.display = efReached ? 'none' : '';
+
   document.getElementById('alloc-50-label').textContent   = ccPaid ? 'Invest (Wealthfront)' : 'Credit card payoff';
-  document.getElementById('alloc-50').textContent          = fmt(invest50) + '/mo';
-  document.getElementById('alloc-wants').textContent       = fmt(wants) + '/mo';
-  document.getElementById('alloc-goals').textContent       = fmt(goals) + '/mo';
-  document.getElementById('alloc-roth').textContent        = fmt(rothIRA) + '/mo';
-  document.getElementById('alloc-emergency').textContent   = efReached ? '$0/mo' : fmt(efAlloc) + '/mo';
-  document.getElementById('alloc-total').textContent       = fmt(monthlySave);
+  document.getElementById('alloc-50').textContent         = fmt(invest50) + '/mo';
+  document.getElementById('alloc-wants').textContent      = fmt(wants) + '/mo';
+  document.getElementById('alloc-safety').textContent     = fmt(safetyAmt) + '/mo';
+  document.getElementById('alloc-roth').textContent       = fmt(rothIRA) + '/mo';
+  document.getElementById('alloc-emergency').textContent  = fmt(safetyAmt) + '/mo';
+  document.getElementById('alloc-total').textContent      = fmt(monthlySave);
   document.getElementById('alloc-phase-label').textContent = ccPaid ? 'After payoff — how to split every month' : 'Right now — how to split every month';
-  document.getElementById('rec-goals').textContent = (ccPaid && efReached) ? 'Recommended: 10%' : 'Recommended: 25%';
+  document.getElementById('rec-retirement').textContent   = 'Recommended: 10%';
 
   // Emergency fund goal progress
-  document.getElementById('ef-goal-badge').textContent     = 'Goal: ' + fmt(efGoal);
-  document.getElementById('ef-goal-label').textContent     = fmt(efGoal) + ' = 3 months of expenses';
-  document.getElementById('ef-reached-toggle').checked     = efReached;
-  document.getElementById('ef-reached-text').textContent   = efReached ? 'Emergency fund goal reached' : 'Emergency fund goal reached';
-  document.getElementById('emergency-row').style.opacity   = efReached ? '0.45' : '1';
+  document.getElementById('ef-goal-badge').textContent    = 'Goal: ' + fmt(efGoal);
+  document.getElementById('ef-goal-label').textContent    = fmt(efGoal) + ' = 3 months of expenses';
+  document.getElementById('ef-reached-toggle').checked    = efReached;
+  document.getElementById('emergency-row').style.opacity  = efReached ? '0.45' : '1';
   document.getElementById('ef-goal-bar-wrap').style.display = efReached ? 'none' : '';
 
   // Savings chart uses the invest slice amount
@@ -244,17 +249,18 @@ function toggleEFReached() {
   var checked = document.getElementById('ef-reached-toggle').checked;
   localStorage.setItem('ef-reached', checked ? '1' : '0');
   if (checked) {
-    // Redirect emergency fund portion to invest, keep 10% for Roth IRA
-    var freed = allocPcts.goals - 10;
-    allocPcts.invest = allocPcts.invest + freed;
-    allocPcts.goals  = 10;
+    var freed = allocPcts.safety;
+    allocPcts.safety  = 0;
+    allocPcts.invest  = allocPcts.invest + freed;
+    allocPcts.retirement = 10;
   } else {
-    // Restore defaults
-    allocPcts.invest = 50;
-    allocPcts.wants  = 25;
-    allocPcts.goals  = 25;
+    allocPcts.invest     = 50;
+    allocPcts.wants      = 25;
+    allocPcts.safety     = 15;
+    allocPcts.retirement = 10;
   }
-  ['invest','wants','goals'].forEach(function(k) {
+  var keys = checked ? ['invest', 'wants', 'retirement'] : ['invest', 'wants', 'safety', 'retirement'];
+  keys.forEach(function(k) {
     document.getElementById('slider-' + k).value = allocPcts[k];
     document.getElementById('pct-' + k).textContent = allocPcts[k] + '%';
   });
