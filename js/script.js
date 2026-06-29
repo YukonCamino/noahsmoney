@@ -132,6 +132,7 @@ function recalc() {
   document.getElementById('alloc-emergency').textContent   = efReached ? '$0/mo' : fmt(efAlloc) + '/mo';
   document.getElementById('alloc-total').textContent       = fmt(monthlySave);
   document.getElementById('alloc-phase-label').textContent = ccPaid ? 'After payoff — how to split every month' : 'Right now — how to split every month';
+  document.getElementById('rec-goals').textContent = (ccPaid && efReached) ? 'Recommended: 10%' : 'Recommended: 25%';
 
   // Emergency fund goal progress
   document.getElementById('ef-goal-badge').textContent     = 'Goal: ' + fmt(efGoal);

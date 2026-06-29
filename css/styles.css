@@ -492,14 +492,19 @@ body {
 .alloc-slider-name { font-size:13px; font-weight:600; color:var(--navy); }
 .alloc-rec-badge { font-size:10px; color:var(--text-muted); background:var(--surface); border:1px solid var(--border); padding:2px 7px; border-radius:10px; white-space:nowrap; }
 .alloc-slider-pct { font-size:15px; font-weight:700; color:var(--navy); margin-left:auto; }
+.alloc-slider-wrap {
+  position:relative;
+  padding:12px 0;
+  margin-bottom:4px;
+  cursor:pointer;
+}
 .alloc-slider {
   -webkit-appearance:none; appearance:none;
+  position:relative;
   width:100%; height:6px; border-radius:3px;
   background:var(--border); outline:none; cursor:pointer;
-  margin-bottom:4px;
-  touch-action:pan-x;
-  padding:10px 0;
-  box-sizing:border-box;
+  display:block;
+  margin:0;
 }
 .alloc-slider::-webkit-slider-thumb {
   -webkit-appearance:none; appearance:none;
