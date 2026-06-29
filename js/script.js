@@ -229,6 +229,21 @@ showTab = function(id, btn) {
 function toggleEFReached() {
   var checked = document.getElementById('ef-reached-toggle').checked;
   localStorage.setItem('ef-reached', checked ? '1' : '0');
+  if (checked) {
+    // Redirect emergency fund portion to invest, keep 10% for Roth IRA
+    var freed = allocPcts.goals - 10;
+    allocPcts.invest = allocPcts.invest + freed;
+    allocPcts.goals  = 10;
+  } else {
+    // Restore defaults
+    allocPcts.invest = 50;
+    allocPcts.wants  = 25;
+    allocPcts.goals  = 25;
+  }
+  ['invest','wants','goals'].forEach(function(k) {
+    document.getElementById('slider-' + k).value = allocPcts[k];
+    document.getElementById('pct-' + k).textContent = allocPcts[k] + '%';
+  });
   recalc();
 }
 
