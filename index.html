@@ -413,8 +413,12 @@
             <div class="alloc-slider-amount" id="alloc-goals">—</div>
             <div class="budget-goals-sub" style="margin-top:8px;">
               <div class="budget-goals-row">
-                <span>Roth IRA</span>
+                <span>Roth IRA <span style="font-size:10px; color:var(--text-muted); font-weight:400;">IRS max $7,500/yr</span></span>
                 <span id="alloc-roth">—</span>
+              </div>
+              <div class="budget-goals-row" id="roth-cap-warning" style="display:none;">
+                <span style="color:#b45309; font-size:11px;">⚠ Capped at $625/mo — IRS annual limit</span>
+                <span></span>
               </div>
               <div class="budget-goals-row" id="emergency-row">
                 <span>Emergency fund <span class="ef-goal-badge" id="ef-goal-badge"></span></span>

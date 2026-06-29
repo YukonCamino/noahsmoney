@@ -119,9 +119,22 @@ function recalc() {
   var slice50   = monthlySave * (allocPcts.invest / 100);
   var wants     = monthlySave * (allocPcts.wants  / 100);
   var goals     = monthlySave * (allocPcts.goals  / 100);
-  var rothIRA   = efReached ? goals : Math.min(200, goals);
+  var rothMax   = 625; // $7,500/yr IRS limit
+  var rothIRA   = efReached ? Math.min(goals, rothMax) : Math.min(200, goals);
   var efAlloc   = efReached ? 0 : Math.max(goals - 200, 0);
   var invest50  = slice50;
+  var rothCapped = efReached && goals > rothMax;
+
+  // Cap the goals slider max so Roth can't exceed $625/mo when EF is reached
+  var maxGoalsPct = efReached ? Math.min(100, Math.floor(rothMax / (monthlySave || 1) * 100)) : 100;
+  var goalsSlider = document.getElementById('slider-goals');
+  goalsSlider.max = maxGoalsPct;
+  if (allocPcts.goals > maxGoalsPct) {
+    allocPcts.goals = maxGoalsPct;
+    goalsSlider.value = maxGoalsPct;
+    document.getElementById('pct-goals').textContent = maxGoalsPct + '%';
+  }
+  document.getElementById('roth-cap-warning').style.display = rothCapped ? '' : 'none';
   var efGoal    = expenses * 3;
 
   document.getElementById('alloc-50-label').textContent   = ccPaid ? 'Invest (Wealthfront)' : 'Credit card payoff';
