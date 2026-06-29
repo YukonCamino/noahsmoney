@@ -361,17 +361,15 @@
             </div>
           </div>
           <p style="font-size:12px; color:var(--text-muted); margin-top:10px;">50% of your monthly surplus goes here until it's gone. At 20% APR, this card costs more than any investment earns — killing it first is the highest-return move you can make.</p>
+          <div class="cc-toggle-wrap" style="padding:12px 0 0;">
+            <label class="cc-toggle-label" id="cc-toggle-label">
+              <input type="checkbox" id="cc-paid-toggle" onchange="toggleCCPaid()">
+              <span class="cc-toggle-box"></span>
+              Credit card is paid off
+            </label>
+            <span class="cc-paid-badge" id="cc-paid-badge">🎉 Debt free!</span>
+          </div>
         </div>
-      </div>
-
-      <!-- CC PAID OFF TOGGLE -->
-      <div class="cc-toggle-wrap">
-        <label class="cc-toggle-label" id="cc-toggle-label">
-          <input type="checkbox" id="cc-paid-toggle" onchange="toggleCCPaid()">
-          <span class="cc-toggle-box"></span>
-          Credit card is paid off
-        </label>
-        <span class="cc-paid-badge" id="cc-paid-badge">🎉 Debt free!</span>
       </div>
 
       <!-- ALLOCATION SLIDERS -->
