@@ -382,6 +382,52 @@ body {
 .overview-cta { font-size: 12px; font-weight: 600; color: var(--blue-mid); }
 .overview-step:hover .overview-cta { color: var(--navy); }
 
+/* BUDGET */
+.budget-phase {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.budget-phase-label {
+  background: var(--navy);
+  color: white;
+  font-size: 12px; font-weight: 600;
+  padding: 10px 16px;
+  letter-spacing: 0.02em;
+}
+.budget-phase-body { padding: 16px; }
+.budget-cc-info {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.budget-stat-val { font-size: 22px; font-weight: 600; color: var(--navy); display: block; }
+.budget-stat-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.budget-split { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+.budget-donut-wrap { flex-shrink: 0; }
+.budget-donut {
+  width: 130px; height: 130px;
+  border-radius: 50%;
+  background: conic-gradient(#1A6B45 0% 50%, #3567B0 50% 70%, #C9971C 70% 90%, #718096 90% 100%);
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.budget-donut::after {
+  content: '';
+  width: 70px; height: 70px;
+  background: var(--white);
+  border-radius: 50%;
+  position: absolute;
+}
+.budget-legend { flex: 1; display: flex; flex-direction: column; gap: 10px; min-width: 200px; }
+.budget-legend-item { display: flex; align-items: center; gap: 10px; }
+.budget-legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.budget-legend-label { font-size: 13px; font-weight: 500; color: var(--navy); }
+.budget-legend-val { font-size: 12px; color: var(--text-muted); }
+.budget-legend-pct { font-size: 12px; font-weight: 600; color: var(--text-muted); margin-left: auto; }
+
 /* FOOTER */
 .footer {
   background: var(--navy);

@@ -65,6 +65,42 @@ function recalc() {
     yearBalances.push(balance);
   }
 
+  // Credit card payoff calc ($5,231 at 20% APR)
+  var ccBalance = 5231;
+  var ccRate = 0.20 / 12;
+  var ccMonths = 0;
+  var ccInterest = 0;
+  var b = ccBalance;
+  if (monthlySave > b * ccRate) {
+    while (b > 0 && ccMonths < 120) {
+      var interest = b * ccRate;
+      ccInterest += interest;
+      b = b + interest - monthlySave;
+      ccMonths++;
+    }
+    var freeDate = new Date();
+    freeDate.setMonth(freeDate.getMonth() + ccMonths);
+    document.getElementById('cc-months').textContent = ccMonths;
+    document.getElementById('cc-interest').textContent = fmt(ccInterest);
+    document.getElementById('cc-free-date').textContent = freeDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+  } else {
+    document.getElementById('cc-months').textContent = '—';
+    document.getElementById('cc-interest').textContent = '—';
+    document.getElementById('cc-free-date').textContent = 'increase income or cut expenses';
+  }
+
+  // Allocation breakdown
+  var invest    = monthlySave * 0.50;
+  var emergency = monthlySave * 0.20;
+  var vehicle   = monthlySave * 0.20;
+  var fun       = monthlySave * 0.10;
+  document.getElementById('alloc-invest').textContent    = fmt(invest) + '/mo';
+  document.getElementById('alloc-emergency').textContent = fmt(emergency) + '/mo';
+  document.getElementById('alloc-vehicle').textContent   = fmt(vehicle) + '/mo';
+  document.getElementById('alloc-fun').textContent       = fmt(fun) + '/mo';
+  document.getElementById('alloc-total').textContent     = fmt(monthlySave);
+  document.getElementById('emergency-goal').textContent  = fmt(expenses * 3);
+
   document.getElementById('total-income').textContent = fmt(totalIncome);
   document.getElementById('annual-income').textContent = fmt(totalIncome * 12);
   document.getElementById('monthly-save').textContent = fmt(monthlySave);
