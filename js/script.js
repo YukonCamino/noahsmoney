@@ -162,6 +162,8 @@ function recalc() {
   document.getElementById('monthly-save').textContent = fmt(monthlySave);
   document.getElementById('save-2yr').textContent     = fmt(yearBalances[1]);
   document.getElementById('save-4yr').textContent     = fmt(yearBalances[3]);
+  document.getElementById('m-down').value = Math.round(yearBalances[3]);
+  recalcMortgage();
 
   var y1 = yearBalances[0];
   var y2 = yearBalances[1];
